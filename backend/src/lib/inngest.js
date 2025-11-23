@@ -14,6 +14,10 @@ const syncUser = inngest.createFunction(
     const { id, first_name, last_name, email_addresses, image_url } =
       event.data;
 
+    if (!email_addresses || email_addresses.length === 0) {
+      throw new Error("No email addresses provided in user event");
+    }
+
     const newUser = {
       clerkId: id,
       email: email_addresses[0].email_address,
