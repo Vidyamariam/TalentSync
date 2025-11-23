@@ -11,23 +11,18 @@ const userSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    password: {
-      type: String,
-      required: true,
-    },
     profileImage: {
       type: String,
       default: "",
     },
-    clarkId: {
+    clerkId: {
       type: String,
-      default: "",
       required: true,
       unique: true,
     },
   },
   {
-    timeStamps: true,
+    timestamps: true,
   }
 );
 
