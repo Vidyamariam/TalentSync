@@ -5,6 +5,8 @@ import { connectDB } from "./lib/db.js";
 import cors from "cors";
 import { serve } from "inngest/express";
 import { inngest, functions } from "./lib/inngest.js";
+import { clerkMiddleware } from "@clerk/express";
+import chatRoutes from "./routes/chatRoutes.js";
 
 const app = express();
 
@@ -14,14 +16,13 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 
+app.use(clerkMiddleware()); //The clerkMiddleware() function checks the request's cookies and headers for a session JWT and, if found, attaches the Auth object to the request object under the auth key.
+
 app.use("/api/inngest", serve({ client: inngest, functions }));
+app.use("/api/chat", chatRoutes);
 
 app.get("/home", (req, res) => {
-  res.status(200).json({ msg: "response from api." });
-});
-
-app.get("/flowers", (req, res) => {
-  res.status(200).json({ msg: "this is the flowers endpoint" });
+  res.status(200).json({ msg: "api is up and running" });
 });
 
 //make the app ready for deployment
