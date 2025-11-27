@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES6",
+    "checkJs": true // Recommended: enables type checking in JS files
+  },
+  "exclude": ["node_modules"]
+}
