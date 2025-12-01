@@ -9,7 +9,9 @@ export async function createSession(req, res) {
     const userId = req.user._id;
     const clerkId = req.user.clerkId;
     if (!problemTitle || !difficulty) {
-      console.error("problem and difficulty is required");
+      return res
+        .status(400)
+        .json({ msg: "problemTitle and difficulty are required" });
     }
 
     //generate a unique callId for session
@@ -67,7 +69,7 @@ export async function getActiveSessions(_, res) {
 export async function getMyRecentSessions(req, res) {
   try {
     const userId = req.user._id;
-    const sessions = Session.find({
+    const sessions = await Session.find({
       status: "completed",
       $or: [{ host: userId }, { participant: userId }],
     })
@@ -129,7 +131,7 @@ export async function endSession(req, res) {
 
     const session = await Session.findById(id);
     if (!session) return res.status(401).send({ msg: "session not found" });
-    if (session.host)
+    if (!session.host.equals(req.user._id))
       return res.status(403).send({ msg: "Only the host can end the session" });
     if (session.status === "completed") {
       return res.status(400).send({ msg: "The session is already completed" });
