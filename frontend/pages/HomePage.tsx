@@ -14,7 +14,7 @@ function HomePage() {
 
   return (
     <>
-      <h1 className="text-red-500 bg-orange-400 p-x-20">Welcome to the App</h1>
+      <h1 className="text-red-500 bg-orange-400 px-20">Welcome to the App</h1>
 
       <div>This is Homepage</div>
 
