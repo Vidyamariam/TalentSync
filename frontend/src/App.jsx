@@ -1,4 +1,3 @@
-import "./App.css";
 import {
   SignedIn,
   SignedOut,
@@ -12,13 +11,25 @@ import { Navigate, Route, Router, Routes } from "react-router";
 import HomePage from "../pages/HomePage";
 import ProblemsPage from "../pages/ProblemsPage";
 import { Toaster } from "react-hot-toast";
+import DashboardPage from "../pages/DashboardPage";
 
 function App() {
-  const { isSignedIn } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
+
+  //This is to get rid of the flicker issue while checking auth state or if user is signed in
+  if (!isLoaded) return null;
+
   return (
     <>
       <Routes>
-        <Route path={"/"} element={<HomePage />} />
+        <Route
+          path={"/"}
+          element={!isSignedIn ? <HomePage /> : <Navigate to="/dashboard" />}
+        />
+        <Route
+          path={"/dashboard"}
+          element={isSignedIn ? <DashboardPage /> : <Navigate to="/" />}
+        />
         <Route
           path={"/problems"}
           element={isSignedIn ? <ProblemsPage /> : <Navigate to="/" />}
