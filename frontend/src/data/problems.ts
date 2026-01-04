@@ -1,4 +1,35 @@
-export const PROBLEMS = {
+export interface Example {
+  input: string;
+  output: string;
+  explanation?: string;
+}
+
+export interface ProblemDescription {
+  text: string;
+  notes: string[];
+}
+
+export interface StarterCode {
+  [language: string]: string;
+}
+
+export interface ExpectedOutput {
+  [language: string]: string;
+}
+
+export interface Problem {
+  id: string;
+  title: string;
+  difficulty: string;
+  category: string;
+  description: ProblemDescription;
+  examples: Example[];
+  constraints?: string[];
+  starterCode: StarterCode;
+  expectedOutput: ExpectedOutput;
+}
+
+export const PROBLEMS: Record<string, Problem> = {
   "two-sum": {
     id: "two-sum",
     title: "Two Sum",
@@ -348,7 +379,13 @@ print(maxArea([1,1]))  # Expected: 1`,
   },
 };
 
-export const LANGUAGE_CONFIG = {
+export interface LanguageConfig {
+  name: string;
+  icon: string;
+  monacoLang: string;
+}
+
+export const LANGUAGE_CONFIG: Record<string, LanguageConfig> = {
   javascript: {
     name: "JavaScript",
     icon: "/javascript.png",
