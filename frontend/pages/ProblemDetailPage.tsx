@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { PROBLEMS } from "../src/data/problems";
+import { Problem, PROBLEMS } from "../src/data/problems";
 import { PanelGroup, Panel, PanelResizeHandle } from "react-resizable-panels";
 import Navbar from "../components/Navbar/Navbar";
 import OutputPanel from "../components/OutputPanel/OutputPanel";
 import CodeEditor from "../components/CodeEditor/CodeEditor";
 import ProblemDescription from "../components/ProblemDescription/ProblemDescription";
-import { executeCode } from "../src/lib/piston";
+import { executeCode, ExecuteCodeResult } from "../src/lib/piston";
 import toast from "react-hot-toast";
 import confetti from "canvas-confetti";
 
 function ProblemDetailPage() {
   const { id } = useParams();
 
-  const [currentProblemId, setCurrentProblemId] = useState("two-sum");
+  const [currentProblemId, setCurrentProblemId] = useState<string>("two-sum");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [code, setCode] = useState<string | undefined>(
     PROBLEMS[currentProblemId].starterCode.javascript
   );
-  const [output, setOutput] = useState<{
-    success: boolean;
-    output?: string;
-    error?: string;
-  } | null>(null);
+  const [output, setOutput] = useState<ExecuteCodeResult | null>(null);
   const [isRunning, setIsRunning] = useState(false);
   const currentProblem = PROBLEMS[currentProblemId];
   const navigate = useNavigate();
@@ -92,15 +88,11 @@ function ProblemDetailPage() {
     try {
       const result = await executeCode(selectedLanguage, code ?? "");
 
-      console.log(result, "result");
       setOutput(result);
-      setIsRunning(false);
 
       if (result.success) {
         const expectedOutput = currentProblem.expectedOutput[selectedLanguage];
         const testsPassed = checkIfTestsPassed(result.output, expectedOutput);
-
-        console.log(testsPassed, "testsPassed");
 
         if (testsPassed) {
           triggerConfetti();
@@ -112,7 +104,9 @@ function ProblemDetailPage() {
         toast.error("Error executing code. Please try again.");
       }
     } catch (err) {
-      console.error("Error running code:", err);
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsRunning(false);
     }
   };
 

@@ -21,7 +21,7 @@ const LANGUAGE_VERSIONS: LanguageVersion = {
  * @returns {Promise<{success: boolean, output?:string, error?:string}>}
  */
 
-interface ExecuteCodeResult {
+export interface ExecuteCodeResult {
   success: boolean;
   output?: string;
   error?: string;

@@ -1,7 +1,8 @@
 import React from "react";
+import { ExecuteCodeResult } from "../../src/lib/piston";
 
 interface OutputPanelProps {
-  output: any;
+  output: ExecuteCodeResult | null;
 }
 
 function OutputPanel({ output }: OutputPanelProps) {
