@@ -3,12 +3,11 @@ import Navbar from "../components/Navbar/Navbar.jsx";
 import { PROBLEMS } from "../src/data/problems.js";
 import { ChevronRightIcon, Code2Icon } from "lucide-react";
 import { getDifficultyBadgeClass } from "../src/lib/utils.js";
+import { useMyRecentSessions } from "../src/hooks/useSessions.js";
 // import { getDifficultyBadgeClass } from "../lib/utils";
 
 function ProblemsPage() {
   const problems = Object.values(PROBLEMS);
-
-  console.log(problems, "problems");
 
   const easyProblemsCount = problems.filter(
     (p) => p.difficulty === "Easy"
@@ -19,6 +18,10 @@ function ProblemsPage() {
   const hardProblemsCount = problems.filter(
     (p) => p.difficulty === "Hard"
   ).length;
+
+  const { data: myRecentSessions, isLoading } = useMyRecentSessions();
+
+  console.log(myRecentSessions, "recentSessions");
 
   return (
     <div className="min-h-screen bg-base-200">
