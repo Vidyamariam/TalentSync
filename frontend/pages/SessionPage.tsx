@@ -162,7 +162,7 @@ const SessionPage = () => {
                         >
                           {session?.difficulty}
                         </span>
-                        {isHost && session.status === "active" && (
+                        {isHost && session?.status === "active" && (
                           <button
                             onClick={handleEndSession}
                             className="btn btn-error btn-sm"

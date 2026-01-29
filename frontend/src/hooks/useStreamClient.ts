@@ -31,8 +31,14 @@ function useStreamClient({
     let chatClientInstance: StreamChat;
 
     const initCall = async () => {
-      if (!session.callId) return;
-      if (!isHost && !isParticipant) return;
+      if (!session.callId) {
+        setIsInitializingCall(false);
+        return;
+      }
+      if (!isHost && !isParticipant) {
+        setIsInitializingCall(false);
+        return;
+      }
 
       try {
         const { token, userId, userName, userImage } =
