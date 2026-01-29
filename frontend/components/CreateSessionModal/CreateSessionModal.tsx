@@ -33,7 +33,7 @@ function CreateSessionModal({
         <div className="space-y-8">
           <div className="space-y-2">
             <label className="label">
-              <span className="label-text fomt-semibold">Select Problem</span>
+              <span className="label-text font-semibold">Select Problem</span>
               <span className="label-text-alt text-error">*</span>
             </label>
 
@@ -42,7 +42,7 @@ function CreateSessionModal({
               value={roomConfig.problem}
               onChange={(e) => {
                 let selectedProblem = problems.find(
-                  (prob) => prob.title === e.target.value
+                  (prob) => prob.title === e.target.value,
                 );
                 setRoomConfig({
                   problem: e.target.value,

@@ -10,7 +10,7 @@ export const sessionApi = {
     return response.data;
   },
   getSessionById: async (id: string) => {
-    const response = await axiosInstance.get(`/session/:${id}`);
+    const response = await axiosInstance.get(`/api/session/${id}`);
 
     return response.data;
   },
@@ -23,17 +23,17 @@ export const sessionApi = {
     return response.data;
   },
   joinSession: async (id: string) => {
-    const response = await axiosInstance.get(`/session/:${id}/join`);
+    const response = await axiosInstance.post(`/api/session/${id}/join`);
 
     return response.data;
   },
   endSession: async (id: string) => {
-    const response = await axiosInstance.get(`/session/:${id}/end`);
+    const response = await axiosInstance.post(`/api/session/${id}/end`);
 
     return response.data;
   },
   getStreamToken: async () => {
-    const response = await axiosInstance.get("/chat/token");
+    const response = await axiosInstance.get("/api/chat/token");
 
     return response.data;
   },
