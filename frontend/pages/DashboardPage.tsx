@@ -39,9 +39,9 @@ function DashboardPage() {
           onSuccess: (data) => {
             console.log(data, "data");
             setSHowCreateModal(false);
-            navigate(`/sessions/${data.session._id}`);
+            navigate(`/session/${data.session._id}`);
           },
-        }
+        },
       );
     } catch (err: any) {
       toast.error("Error  creating room", err);
