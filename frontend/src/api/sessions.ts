@@ -17,6 +17,7 @@ export const sessionApi = {
   createSession: async (sessionData: {
     problemTitle: string;
     difficulty: string;
+    isPrivate: boolean;
   }) => {
     const response = await axiosInstance.post("/api/session", sessionData);
 

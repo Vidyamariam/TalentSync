@@ -1,12 +1,23 @@
 import React from "react";
 import { PROBLEMS } from "../../src/data/problems";
-import { Code2Icon, Loader2Icon, Plus, PlusIcon } from "lucide-react";
+import {
+  Code2Icon,
+  Loader2Icon,
+  LockIcon,
+  Plus,
+  PlusIcon,
+  UnlockIcon,
+} from "lucide-react";
 
 interface CreateSessionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  roomConfig: { problem: string; difficulty: string };
-  setRoomConfig: (config: { problem: string; difficulty: string }) => void;
+  roomConfig: { problem: string; difficulty: string; isPrivate: boolean };
+  setRoomConfig: (config: {
+    problem: string;
+    difficulty: string;
+    isPrivate: boolean;
+  }) => void;
   onCreateRoom: () => void;
   isCreating: boolean;
 }
@@ -47,6 +58,7 @@ function CreateSessionModal({
                 setRoomConfig({
                   problem: e.target.value,
                   difficulty: selectedProblem?.difficulty || "",
+                  isPrivate: false,
                 });
               }}
             >
@@ -59,6 +71,30 @@ function CreateSessionModal({
                 </option>
               ))}
             </select>
+          </div>
+
+          {/* IS PRIVATE TOGGLE */}
+          <div className="form-control bg-base-200 p-4 rounded-lg">
+            <label className="label cursor-pointer flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                {roomConfig.isPrivate ? (
+                  <LockIcon className="size-4 text-warning" />
+                ) : (
+                  <UnlockIcon className="size-4 text-success" />
+                )}
+                <span className="label-text font-semibold">
+                  Private Session
+                </span>
+              </div>
+              <input
+                type="checkbox"
+                className="toggle toggle-primary"
+                checked={roomConfig.isPrivate}
+                onChange={(e) =>
+                  setRoomConfig({ ...roomConfig, isPrivate: e.target.checked })
+                }
+              />
+            </label>
           </div>
 
           {/* ROOM SUMMARY */}

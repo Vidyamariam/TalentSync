@@ -18,7 +18,11 @@ function DashboardPage() {
   const navigate = useNavigate();
   const user = useUser();
   const [showCreateModal, setSHowCreateModal] = useState(false);
-  const [roomConfig, setRoomConfig] = useState({ problem: "", difficulty: "" });
+  const [roomConfig, setRoomConfig] = useState({
+    problem: "",
+    difficulty: "",
+    isPrivate: false,
+  });
 
   const createSessionMutation = useCreateSession();
 
@@ -34,6 +38,7 @@ function DashboardPage() {
         {
           problemTitle: roomConfig.problem,
           difficulty: roomConfig.difficulty?.toLowerCase(),
+          isPrivate: roomConfig.isPrivate,
         },
         {
           onSuccess: (data) => {

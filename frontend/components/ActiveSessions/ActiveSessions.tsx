@@ -64,7 +64,7 @@ function ActiveSessions({
                         </h2>
                         <span
                           className={`badge badger-sm ${getDifficultyBadgeClass(
-                            session.difficulty
+                            session.difficulty,
                           )}`}
                         >
                           {session.difficulty.slice(0, 1).toUpperCase() +
