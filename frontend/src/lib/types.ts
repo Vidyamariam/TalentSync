@@ -17,4 +17,5 @@ export interface SessionData {
   createdAt: string; // ISO Date string
   updatedAt: string; // ISO Date string
   __v: number; // MongoDB version key
+  isPrivate: boolean;
 }

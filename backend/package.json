@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "deploy": "wrangler deploy",
+    "build:workers": "echo 'Build complete'"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,7 @@
     "@clerk/express": "^1.7.41",
     "@stream-io/node-sdk": "^0.7.12",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "inngest": "^3.44.3",
@@ -23,6 +26,13 @@
     "talentsync": "file:.."
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "buffer": "^6.0.3",
+    "fs": "^0.0.1-security",
+    "nodemon": "^3.1.10",
+    "path": "^0.12.7",
+    "stream": "^0.0.3",
+    "string_decoder": "^1.3.0",
+    "url": "^0.11.4",
+    "wrangler": "^4.61.1"
   }
 }
