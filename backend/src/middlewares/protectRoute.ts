@@ -1,9 +1,15 @@
 import { requireAuth } from "@clerk/express";
 import User from "../models/User.js";
+import { Request, Response, NextFunction } from "express";
+
+interface AuthenticatedRequest extends Request {
+  user?: Awaited<ReturnType<typeof User.findOne>>;
+  auth: () => { userId: string };
+}
 
 export const protectRoute = [
   requireAuth(),
-  async (req, res, next) => {
+  async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
       const clerkId = req.auth().userId;
 

@@ -1,4 +1,4 @@
-export const getDifficultyBadgeClass = (difficulty) => {
+export const getDifficultyBadgeClass = (difficulty: string) => {
   switch (difficulty?.toLowerCase()) {
     case "easy":
       return "badge-success";

@@ -1,13 +1,5 @@
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignOutButton,
-  useAuth,
-  UserButton,
-  useUser,
-} from "@clerk/clerk-react";
-import { Navigate, Route, Router, Routes } from "react-router";
+import { useUser } from "@clerk/clerk-react";
+import { Navigate, Route, Routes } from "react-router";
 import HomePage from "../pages/HomePage";
 import ProblemsPage from "../pages/ProblemsPage";
 import { Toaster } from "react-hot-toast";
